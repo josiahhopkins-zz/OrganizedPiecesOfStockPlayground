@@ -2,6 +2,7 @@ package com.example.josiah.organizedpiecesofstockplayground;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -21,7 +22,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity implements JoinGroupFragment.OnFragmentInteractionListener, PortfolioListFragment.OnListFragmentInteractionListener, UsersWithinGroupListFragment.OnListFragmentInteractionListener, AllGroupsFragmentListFragment.OnListFragmentInteractionListener, StockListFragment.OnListFragmentInteractionListener, StockPurchaseFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements InitialDisplayFragment.OnFragmentInteractionListener, JoinGroupFragment.OnFragmentInteractionListener, PortfolioListFragment.OnListFragmentInteractionListener, UsersWithinGroupListFragment.OnListFragmentInteractionListener, AllGroupsFragmentListFragment.OnListFragmentInteractionListener, StockListFragment.OnListFragmentInteractionListener, StockPurchaseFragment.OnFragmentInteractionListener {
     public Stock getCurrentStock() {
         return currentStock;
     }
@@ -99,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements JoinGroupFragment
         mySharedPreferences.edit().putString("Username", "Josiah");
 
         FragmentManager fm = getSupportFragmentManager();
-        PortfolioListFragment s = new PortfolioListFragment();
+        InitialDisplayFragment s = new InitialDisplayFragment();
         fm.beginTransaction()
                 .add(R.id.fragment_container, s)
                 .commit();
@@ -151,6 +152,11 @@ public class MainActivity extends AppCompatActivity implements JoinGroupFragment
 
     @Override
     public void JoinGroupInteraction() {
+
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
     }
 

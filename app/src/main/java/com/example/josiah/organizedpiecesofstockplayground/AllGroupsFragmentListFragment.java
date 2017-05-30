@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -78,9 +80,9 @@ public class AllGroupsFragmentListFragment extends Fragment {
             } else {
                 mRecyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
+            Log.e("URL", Group.ALL_GROUP_URL);
             DownloadTask d = new DownloadTask();
             d.execute(new String[]{Group.ALL_GROUP_URL});
-            //recyclerView.setAdapter(new MyAllGroupsFragmentListRecyclerViewAdapter(DummyContent.ITEMS, mListener));
         }
         return view;
     }
@@ -145,6 +147,7 @@ public class AllGroupsFragmentListFragment extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             // Something wrong with the network or the URL.
+            Log.e("Finished in post ", "");
             if (result.startsWith("Unable to")) {
                 Toast.makeText(getActivity().getApplicationContext(), result, Toast.LENGTH_LONG).show();
                 return;

@@ -60,6 +60,9 @@ public class Group {
     public void addMember(String username, String portfolioName, Double value){
         HashMap portfolioHolder = new HashMap<String, Double>();
         portfolioHolder.put(portfolioName, value);
+        if(this.myMemberInfo == null){
+            this.myMemberInfo = new HashMap<String, Map<String, Double>>();
+        }
         this.myMemberInfo.put(username, portfolioHolder);
     }
 
@@ -67,6 +70,7 @@ public class Group {
         String reason = null;
         if (stockJSON != null) {
             try {
+                Log.e("About to add new groups","");
                 JSONArray arr = new JSONArray(stockJSON);
                 Map<String, Group> groupNameToGroup = new HashMap<>();
                 for (int i = 0; i < arr.length(); i++) {
