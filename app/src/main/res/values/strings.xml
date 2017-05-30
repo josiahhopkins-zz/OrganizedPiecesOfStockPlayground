@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">OrganizedPiecesOfStockPlayground</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="purchase">Purchase</string>
+    <string name="quantity_to_buy">Quantity to buy</string>
+</resources>
