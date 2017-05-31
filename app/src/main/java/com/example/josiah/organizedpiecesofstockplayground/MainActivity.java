@@ -107,9 +107,8 @@ public class MainActivity extends AppCompatActivity implements InitialDisplayFra
     }
 
     private void debugSetup() {
-        this.currentGroup = new Group("GroupName", "OwnerName");
-        this.currentUser = new User("Josiah");
-        this.currentPortfolio = new Portfolio(10000,10000,"Test","Josiah");
+        SharedPreferences mSharedPreferences = getSharedPreferences("pref", Context.MODE_PRIVATE);
+        this.currentUser = new User(mSharedPreferences.getString(getString(R.string.LOGIN_PREFS), "Nobody"));
     }
 
     @Override
