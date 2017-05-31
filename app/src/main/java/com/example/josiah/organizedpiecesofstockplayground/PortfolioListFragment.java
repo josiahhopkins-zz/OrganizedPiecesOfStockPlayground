@@ -143,7 +143,7 @@ public class PortfolioListFragment extends Fragment {
                         response += s;
                     }
                 } catch (Exception e) {
-                    response = "Unable to download the list of courses, Reason: " + e.getMessage();
+                    response = "Unable to download the list of portfolios, Reason: " + e.getMessage();
                 } finally {
                     if (urlConnection != null) urlConnection.disconnect();
                 }

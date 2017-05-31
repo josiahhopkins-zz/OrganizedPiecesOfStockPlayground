@@ -26,7 +26,10 @@ public class Group {
     public final static String OWNER_GROUP_URL ="http://cssgate.insttech.washington.edu/~josiah3/PHP_Code/PHP%20Code/list.php?cmd=groups&owner=";
 
     public Group(String ownerUsername, String myName) {
-        new Group(ownerUsername, myName, 10000);
+        this.myOwnerUsername = ownerUsername;
+        this.myMemberInfo = new HashMap<>();
+        this.myName = myName;
+        this.portfolio_value = 10000;
     }
 
     public Group(String ownerUsername, String myName, double portfolio_value){
@@ -64,6 +67,8 @@ public class Group {
             this.myMemberInfo = new HashMap<String, Map<String, Double>>();
         }
         this.myMemberInfo.put(username, portfolioHolder);
+
+
     }
 
     public static String parseStockJSON(String stockJSON, List<Group> groupList) {
@@ -100,5 +105,9 @@ public class Group {
 
     public double getPortfolioValue() {
         return portfolio_value;
+    }
+
+    public boolean isUserMember(String username){
+        return this.myMemberInfo.containsKey(username);
     }
 }
