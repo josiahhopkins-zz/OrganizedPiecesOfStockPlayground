@@ -67,6 +67,8 @@ public class Group {
             this.myMemberInfo = new HashMap<String, Map<String, Double>>();
         }
         this.myMemberInfo.put(username, portfolioHolder);
+
+
     }
 
     public static String parseStockJSON(String stockJSON, List<Group> groupList) {
@@ -103,5 +105,9 @@ public class Group {
 
     public double getPortfolioValue() {
         return portfolio_value;
+    }
+
+    public boolean isUserMember(String username){
+        return this.myMemberInfo.containsKey(username);
     }
 }

@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.josiah.organizedpiecesofstockplayground.UtilityClasses.Group;
+import com.example.josiah.organizedpiecesofstockplayground.UtilityClasses.Portfolio;
 import com.example.josiah.organizedpiecesofstockplayground.UtilityClasses.UploadTask;
 
 
@@ -81,6 +83,14 @@ public class JoinGroupFragment extends Fragment {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Group g = ((MainActivity) getActivity()).getCurrentGroup();
+
+                String portfolioName = ((EditText) getActivity().findViewById(R.id.join_group_portfolio_name)).getText().toString();
+                String username = ((MainActivity) getActivity()).getCurrentUser().getMyUsername();
+                double value = ((MainActivity) getActivity()).getCurrentGroup().getPortfolioValue();
+                Log.e("Adding username:", username);
+                g.addMember(username, portfolioName, value);
+                ((MainActivity)getActivity()).setCurrentGroup(g);
                 UploadTask uploadTask = new UploadTask();
                 uploadTask.execute(new String[]{buildURL()});
 
@@ -92,10 +102,15 @@ public class JoinGroupFragment extends Fragment {
     public String buildURL(){
         MainActivity mainActivity = ((MainActivity) getActivity());
         String toReturn = JOIN_GROUP_URL;
-        toReturn = toReturn + "&group_name=" + mainActivity.getCurrentGroup().getMyName();
+        toReturn = toReturn + "&group_name=" + ((MainActivity) getActivity()).getCurrentGroup().getMyName();
         toReturn = toReturn + "&portfolio_value=" + Double.toString(mainActivity.getCurrentGroup().getPortfolioValue());
-        toReturn = toReturn + "&username=" + mainActivity.getCurrentUser().getMyUsername();
+        toReturn = toReturn + "&username=" + ((MainActivity) getActivity()).getCurrentUser().getMyUsername();
         toReturn = toReturn + "&portfolio_name=" + ((EditText) getActivity().findViewById(R.id.join_group_portfolio_name)).getText().toString();
+        toReturn = toReturn + "&default_value=" + ((MainActivity) getActivity()).getCurrentGroup().getPortfolioValue();
+        toReturn = toReturn + "&owner=" +((MainActivity) getActivity()).getCurrentGroup().getMyOwnerUsername();
+        toReturn = toReturn.replace(" ", "%20");
+        toReturn = toReturn.replace(".", "%2E");
+
         Log.e("URL: ", toReturn);
         return toReturn;
     }

@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.josiah.organizedpiecesofstockplayground.UtilityClasses.*;
@@ -16,6 +17,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -130,7 +132,26 @@ public class MainActivity extends AppCompatActivity implements InitialDisplayFra
 
     @Override
     public void onListFragmentInteraction(Group item) {
+        this.currentGroup = item;
+        Log.e("Username", currentUser.getMyUsername());
+        Log.e("List of members:", Arrays.toString(currentGroup.getMyMembers().keySet().toArray()));
 
+        if(currentGroup.isUserMember(currentUser.getMyUsername())) {
+            FragmentManager fm = getSupportFragmentManager();
+            UsersWithinGroupListFragment s = new UsersWithinGroupListFragment();
+            fm.beginTransaction()
+                    .replace(R.id.fragment_container, s)
+                    .addToBackStack(null)
+                    .commit();
+        } else {
+            FragmentManager fm = getSupportFragmentManager();
+            JoinGroupFragment s = new JoinGroupFragment();
+            fm.beginTransaction()
+                    .replace(R.id.fragment_container, s)
+                    .addToBackStack(null)
+                    .commit();
+        }
+        Log.e("List of members:", currentGroup.getMyMembers().keySet().toString());
     }
 
     @Override
